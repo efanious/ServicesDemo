@@ -2,6 +2,8 @@ package efana.example.servicesdemo;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.util.Log;
 
 public class MyIntentService extends IntentService {
@@ -24,6 +26,8 @@ public class MyIntentService extends IntentService {
 
         int sleepTime = intent.getIntExtra("sleepTime", 1);
 
+        ResultReceiver resultReceiver = intent.getParcelableExtra("receiver");
+
         int ctr = 1;
 
         //Dummy Long Operation
@@ -37,6 +41,10 @@ public class MyIntentService extends IntentService {
             }
             ctr++;
         }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("resultIntentService", "Counter stopped at " + ctr + " seconds");
+        resultReceiver.send(18, bundle);
     }
 
     @Override
