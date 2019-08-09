@@ -43,7 +43,7 @@ public class MyStartedService extends Service {
         Log.i(TAG, "onDestroy, Thread name " + Thread.currentThread().getName());
     }
 
-    class MyAsyncTask extends AsyncTask<Integer, String, Void> {
+    class MyAsyncTask extends AsyncTask<Integer, String, String> {
 
         private final String TAG = MyAsyncTask.class.getSimpleName();
 
@@ -55,7 +55,7 @@ public class MyStartedService extends Service {
         }
 
         @Override // Perform our long running task
-        protected Void doInBackground(Integer... params) {
+        protected String doInBackground(Integer... params) {
             Log.i(TAG, "doInBackground, Thread name " + Thread.currentThread().getName());
 
             int sleepTime = params[0];
@@ -73,7 +73,7 @@ public class MyStartedService extends Service {
                 }
                 ctr++;
             }
-            return null;
+            return "Counter Stopped at " + ctr + " seconds";
         }
 
         @Override
@@ -85,11 +85,15 @@ public class MyStartedService extends Service {
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(String str) {
+            super.onPostExecute(str);
 
             stopSelf(); // Destroy the Service from within the Service class itself
             Log.i(TAG, "onPostExecute, Thread name " + Thread.currentThread().getName());
+
+            Intent intent = new Intent("action.service.to.activity");
+            intent.putExtra("startServiceResult", str);
+            sendBroadcast(intent);
         }
     }
 }
