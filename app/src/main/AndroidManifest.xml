@@ -19,6 +19,11 @@
 
         <service android:name=".MyStartedService"/>
         <service android:name=".MyIntentService"/>
+
+        <service android:name=".MyBoundService"/>
+        <activity android:name=".SecondActivity">
+
+        </activity>
     </application>
 
 </manifest>
