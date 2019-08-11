@@ -63,6 +63,7 @@
         android:layout_alignTop="@+id/btnMul"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:onClick="onClickEvent"
         android:text="Divide" />
 
     <TextView

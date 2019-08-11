@@ -49,6 +49,17 @@ public class SecondActivity extends AppCompatActivity {
         bindService(intent, mConnection, BIND_AUTO_CREATE);
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        //Unbind service
+        if (isBound) {
+            unbindService(mConnection);
+            isBound = false;
+        }
+    }
+
     public void onClickEvent(View view) {
 
         EditText etNumOne = (EditText) findViewById(R.id.etNumOne);
