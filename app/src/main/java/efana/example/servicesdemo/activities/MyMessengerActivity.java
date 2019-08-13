@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
@@ -23,6 +24,28 @@ public class MyMessengerActivity extends AppCompatActivity {
     private TextView txvResult;
 
     private Messenger mService = null;
+
+    private class IncomingResponseHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msgFromService) {
+
+            switch (msgFromService.what) {
+                case 87:
+                    Bundle bundle = msgFromService.getData();
+                    int result = bundle.getInt("result", 0);
+                    //Display result in textView
+                    txvResult.setText("Result: " + result);
+                    break;
+
+                default:
+                    super.handleMessage(msgFromService);
+
+            }
+        }
+    }
+
+    private Messenger incomingMessenger = new Messenger(new IncomingResponseHandler());
 
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
@@ -60,6 +83,8 @@ public class MyMessengerActivity extends AppCompatActivity {
         bundle.putInt("numTwo", num2);
 
         msgToService.setData(bundle);
+        //Definition of reply to messenger
+        msgToService.replyTo = incomingMessenger;
 
         try {
             mService.send(msgToService);

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
 
@@ -28,7 +29,21 @@ public class MyMessengerService extends Service {
                     int result = addNumbers(numOne, numTwo);
 
                     Toast.makeText(getApplicationContext(), "Result : " + result, Toast.LENGTH_SHORT).show();
-                    
+
+                    // Send data back to the Activity
+                    Messenger incomingMessenger = msg.replyTo;
+                    Message msgToActivity = Message.obtain(null, 87);
+
+                    Bundle bundleToActivity = new Bundle();
+                    bundleToActivity.putInt("result", result);
+
+                    msgToActivity.setData(bundleToActivity);
+
+                    try {
+                        incomingMessenger.send(msgToActivity);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
 
                     break;
 
