@@ -22,6 +22,8 @@ public class MyStartedService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "onStartCommand, Thread name " + Thread.currentThread().getName());
 
+        // Perform Tasks [ Short Duration Task: Don't block the UI ]
+
         int sleepTime = intent.getIntExtra("sleepTime", 1);
 
         new MyAsyncTask().execute(sleepTime);

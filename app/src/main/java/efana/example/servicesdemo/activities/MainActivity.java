@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(myStartedServiceReceiver, intentFilter);
     }
 
+    // To receive the data back from MyStartedService.java using BroadcastReceiver
     private BroadcastReceiver myStartedServiceReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

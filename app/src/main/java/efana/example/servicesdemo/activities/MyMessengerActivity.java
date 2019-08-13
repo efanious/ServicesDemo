@@ -23,9 +23,9 @@ public class MyMessengerActivity extends AppCompatActivity {
     boolean mIsBound = false;
     private TextView txvResult;
 
-    private Messenger mService = null;
+    private Messenger mService = null; // To send data to Service
 
-    private class IncomingResponseHandler extends Handler {
+    private class IncomingResponseHandler extends Handler { // To receive data back from Service
 
         @Override
         public void handleMessage(Message msgFromService) {
@@ -45,6 +45,7 @@ public class MyMessengerActivity extends AppCompatActivity {
         }
     }
 
+    // To receive data back from Service
     private Messenger incomingMessenger = new Messenger(new IncomingResponseHandler());
 
     private ServiceConnection mConnection = new ServiceConnection() {
