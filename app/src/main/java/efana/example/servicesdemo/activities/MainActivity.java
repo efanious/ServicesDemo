@@ -1,4 +1,4 @@
-package efana.example.servicesdemo;
+package efana.example.servicesdemo.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +11,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import efana.example.servicesdemo.services.MyIntentService;
+import efana.example.servicesdemo.services.MyStartedService;
+import efana.example.servicesdemo.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,7 +80,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToSecondActivity(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
+        Intent intent = new Intent(this, MyBoundActivity.class);
+        startActivity(intent);
+    }
+
+    public void moveToMessengerActivity(View view) {
+        Intent intent = new Intent(this, MyMessengerActivity.class);
         startActivity(intent);
     }
 

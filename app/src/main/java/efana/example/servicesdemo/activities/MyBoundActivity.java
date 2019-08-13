@@ -1,4 +1,4 @@
-package efana.example.servicesdemo;
+package efana.example.servicesdemo.activities;
 
 import android.content.ComponentName;
 import android.content.Intent;
@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class SecondActivity extends AppCompatActivity {
+import efana.example.servicesdemo.services.MyBoundService;
+import efana.example.servicesdemo.R;
+
+public class MyBoundActivity extends AppCompatActivity {
 
     boolean isBound = false;
     private MyBoundService myBoundService;
@@ -39,7 +42,7 @@ public class SecondActivity extends AppCompatActivity {
 
     /*
         Whenever this activity starts we need to make
-        SecondActivity bind to MyBoundService
+        MyBoundActivity bind to MyBoundService
      */
     @Override
     protected void onStart() {

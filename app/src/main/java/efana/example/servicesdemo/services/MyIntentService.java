@@ -1,4 +1,4 @@
-package efana.example.servicesdemo;
+package efana.example.servicesdemo.services;
 
 import android.app.IntentService;
 import android.content.Intent;

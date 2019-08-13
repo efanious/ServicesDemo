@@ -1,4 +1,4 @@
-package efana.example.servicesdemo;
+package efana.example.servicesdemo.services;
 
 import android.app.Service;
 import android.content.Intent;
@@ -12,7 +12,7 @@ public class MyBoundService extends Service {
 
     public class MyLocalBinder extends Binder {
 
-        MyBoundService getService() {
+        public MyBoundService getService() {
             return MyBoundService.this;
         }
 
